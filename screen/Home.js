@@ -1,33 +1,31 @@
 import { StyleSheet, Text, View, TouchableOpacity,Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import { fetchUser } from "../src/Services/Api";
+import { useDispatch } from "react-redux"; 
+
 import UserComponent from '../components/UserComponent';
+import { addUserList } from "../store/redux/User"
 export default function Home({navigation}) {
+  const dispatch = useDispatch(); 
 
-
-  
-  const [userData, setUserData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const userData = await fetchUser();
-        setUserData(userData);
-       
+        dispatch(addUserList(userData.data));
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
     };
     fetchData();
-  }, []);
+  }, []); 
 
 
-  const handleMoviePress = (id) => {
-    navigation.navigate('userDetail')
-  }
+ 
 
   return (
     <View style={styles.container}>
-        <UserComponent userData={userData}/>
+        <UserComponent />
     </View>
   );
 }

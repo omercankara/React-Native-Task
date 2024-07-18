@@ -1,8 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import UserReducer from "./User"; // Redux Slice'ın bulunduğu yere göre import yolu ayarlanmalı
-
+import UserReducer from "./User"; 
 export const store = configureStore({
     reducer:{
-        user: UserReducer  // Reducer'ın anahtar adının user olmasına dikkat edin
+        Users: UserReducer  
     }
 });

@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const UserListSlice = createSlice({
-  name: 'user',
+  name: 'Users',
   initialState: {
-    users: []  
+    Users: []  
   },
   reducers: {
     addUserList: (state, action) => {
-      state.users.push(action.payload); // addUserList reducer'ında state güncellenecek
+      state.Users.push(action.payload); 
     },
     
   }
