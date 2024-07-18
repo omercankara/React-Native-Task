@@ -1,14 +1,16 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View,Image } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 const logo = require("./assets/logo.png");
+const bell = require("./assets/bell.png");
+const heart = require("./assets/heart.png");
+const msg = require("./assets/msg.png");
+
 import Home from "./screen/Home";
-import UserDetail from "./screen/UserDetail"
-
-
+import UserDetail from "./screen/UserDetail";
 
 const Tab = createMaterialBottomTabNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -19,27 +21,33 @@ const HeaderLogo = () => (
   </View>
 );
 
-const HeaderRight = () => {
-  return (
-    <MaterialCommunityIcons
-      name="heart"
-      size={26}
-      style={{ marginRight: 15 }}
-      color="red"
-    />
-  );
-};
-
-
+const HeaderRight = () => (
+  <View style={styles.headerRightContainer}>
+    <Image source={msg} style={styles.headerRightIcon} />
+    <Image source={heart} style={styles.headerRightIcon} />
+    <Image source={bell} style={styles.bellIcon} />
+  </View>
+);
 
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={Home} options={{
-         headerTitle: props => <HeaderLogo {...props} />,
-          headerRight: () => <HeaderRight />, // Burada özel headerRight bileşenini ekliyoruz
-        }} />
-      <HomeStack.Screen name="userDetail" component={UserDetail} />
+      <HomeStack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerTitle: (props) => <HeaderLogo {...props} />,
+          headerRight: () => <HeaderRight />, 
+        }}
+      />
+      <HomeStack.Screen
+        name="userDetail"
+        component={UserDetail}
+        options={{
+          headerTitle: (props) => <HeaderLogo {...props} />,
+          headerRight: () => <HeaderRight />, 
+        }}
+      />
     </HomeStack.Navigator>
   );
 }
@@ -102,7 +110,6 @@ export default function App() {
             ),
           }}
         />
-
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -114,5 +121,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  headerRightContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  headerRightIcon: {
+    resizeMode: "contain",
+    height: 50,
+    width: 40,
+  },
+  bellIcon: {
+    marginTop: 5,
   },
 });
