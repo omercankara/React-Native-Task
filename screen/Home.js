@@ -1,13 +1,17 @@
 import { StyleSheet, Text, View, TouchableOpacity,Image } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchUser } from "../src/Services/Api";
-
+import UserComponent from '../components/UserComponent';
 export default function Home({navigation}) {
+
+
+  
+  const [userData, setUserData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const movieData = await fetchUser();
-        console.log(movieData);
+        const userData = await fetchUser();
+        setUserData(userData);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -22,13 +26,7 @@ export default function Home({navigation}) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-      
-        onPress={() => handleMoviePress(1)}
-        style={styles.item}
-      >
-       
-      </TouchableOpacity>
+        <UserComponent userData={userData}/>
     </View>
   );
 }
@@ -37,7 +35,6 @@ const styles = StyleSheet.create({
   container:{
     height:1000,
     width:'100%',
-    backgroundColor:"black"
   },
   item:{
     width:'25%',
