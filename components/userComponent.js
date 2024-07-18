@@ -8,13 +8,14 @@ import {
 } from "react-native";
 import React, { useEffect } from "react";
 const banner = require("../assets/banner.png");
+const userimg = require("../assets/userimg.png");
+
 export default function UserComponent({ userData }) {
-  const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <Text>{item.email}</Text>
-      <Text>{item.first_name}</Text>
-    </View>
-  );
+
+  useEffect(() => {
+    console.log(userData)
+  },[])
+
 
   return (
     <View style={styles.itemContainer}>
@@ -35,23 +36,18 @@ export default function UserComponent({ userData }) {
         </View>
       </View>
 
-      {/* <View style={styles.userList}>
-        <FlatList
-          data={userData}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
-        />
-      </View> */}
-
-      <View style={styles.userListContainer}>
-        <View style={styles.container}>
-          <View style={styles.userCard}>
-              <View style={styles.userHeader}></View>
-              <View style={styles.userName}></View>
+      {/* <View style={styles.userListContainer}>
+        {userData.map((item, index) => (
+          <View key={index} style={styles.userCard}>
+            <View style={styles.userHeader}>
+              <Image source={userimg} style={styles.userImage} />
+            </View>
+            <View style={styles.userName}>
+              <Text>{item.email}</Text>
+            </View>
           </View>
-        
-        </View>
-      </View>
+        ))}
+      </View> */}
     </View>
   );
 }
@@ -93,7 +89,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     width: "100%",
-    marginBottom:10
+    marginBottom: 10,
   },
   bannerImages: {
     width: "90%",
@@ -116,31 +112,33 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   container: {
-    width:'95%',
+    width: "95%",
     display: "flex",
     justifyContent: "space-around",
     flexDirection: "row",
     flexWrap: "wrap",
-    backgroundColor:"blue"
+    backgroundColor: "blue",
   },
   userCard: {
     width: "48%",
     height: 200,
     backgroundColor: "gray",
     marginVertical: 10,
-    justifyContent: 'flex-start',
-    alignItems:"center"
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
 
-  userHeader:{
-    width:'80%',
-    height:'80%',
-    backgroundColor:"white",
-    borderRadius:10,
-  },  
-  userName:{
-    width:'80%',
-    height:'20%',
-    backgroundColor:"red"
-  }
+  userHeader: {
+    width: "80%",
+    height: "80%",
+    backgroundColor: "white",
+    borderRadius: 10,
+  },
+  userName: {
+    width: "80%",
+    height: "10%",
+    backgroundColor: "red",
+  },
 });

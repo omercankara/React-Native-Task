@@ -4,6 +4,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { Provider } from "react-redux";
+
+import { store } from "./store/redux/store";
+
 const logo = require("./assets/logo.png");
 const bell = require("./assets/bell.png");
 const heart = require("./assets/heart.png");
@@ -31,24 +35,26 @@ const HeaderRight = () => (
 
 function HomeStackScreen() {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen
-        name="Home"
-        component={Home}
-        options={{
-          headerTitle: (props) => <HeaderLogo {...props} />,
-          headerRight: () => <HeaderRight />, 
-        }}
-      />
-      <HomeStack.Screen
-        name="userDetail"
-        component={UserDetail}
-        options={{
-          headerTitle: (props) => <HeaderLogo {...props} />,
-          headerRight: () => <HeaderRight />, 
-        }}
-      />
-    </HomeStack.Navigator>
+    <Provider store={store}>
+      <HomeStack.Navigator>
+        <HomeStack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            headerTitle: (props) => <HeaderLogo {...props} />,
+            headerRight: () => <HeaderRight />,
+          }}
+        />
+        <HomeStack.Screen
+          name="userDetail"
+          component={UserDetail}
+          options={{
+            headerTitle: (props) => <HeaderLogo {...props} />,
+            headerRight: () => <HeaderRight />,
+          }}
+        />
+      </HomeStack.Navigator>
+    </Provider>
   );
 }
 
