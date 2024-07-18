@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { fetchUser } from "../src/Services/Api";
 import { useDispatch } from "react-redux";
 
-import UserComponent from "../components/UserComponent";
+import UserComponent from "../components/userComponent";
 
 import { addUserList } from "../store/redux/User";
 import HeaderComponent from "../components/HeaderComponent";

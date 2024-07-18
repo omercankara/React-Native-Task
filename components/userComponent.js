@@ -13,7 +13,7 @@ import EvilIcons from "@expo/vector-icons/EvilIcons";
 
 const banner = require("../assets/banner.png");
 
-export default function UserComponent({ navigation }) {
+export default function userComponent({ navigation }) {
   const userData = useSelector((state) => state.Users.Users);
   const [searchText, setSearchText] = useState("");
 
