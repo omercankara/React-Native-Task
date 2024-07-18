@@ -1,10 +1,10 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View,Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
+const logo = require("./assets/logo.png");
 import Home from "./screen/Home";
 import UserDetail from "./screen/UserDetail"
 
@@ -13,10 +13,32 @@ import UserDetail from "./screen/UserDetail"
 const Tab = createMaterialBottomTabNavigator();
 const HomeStack = createNativeStackNavigator();
 
+const HeaderLogo = () => (
+  <View style={styles.headerLogoContainer}>
+    <Image source={logo} style={styles.headerLogo} />
+  </View>
+);
+
+const HeaderRight = () => {
+  return (
+    <MaterialCommunityIcons
+      name="heart"
+      size={26}
+      style={{ marginRight: 15 }}
+      color="red"
+    />
+  );
+};
+
+
+
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={Home} options={{ headerTitle: "Ana Sayfa" }} />
+      <HomeStack.Screen name="Home" component={Home} options={{
+         headerTitle: props => <HeaderLogo {...props} />,
+          headerRight: () => <HeaderRight />, // Burada özel headerRight bileşenini ekliyoruz
+        }} />
       <HomeStack.Screen name="userDetail" component={UserDetail} />
     </HomeStack.Navigator>
   );

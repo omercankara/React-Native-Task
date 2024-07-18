@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity,Image } from "react-native";
 import React, { useEffect } from "react";
 import { fetchUser } from "../src/Services/Api";
 
