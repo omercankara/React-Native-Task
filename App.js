@@ -96,7 +96,8 @@ export default function App() {
           name="Kategoriler"
           component={HomeStackScreen}
           options={{
-            tabBarLabel: "Vitrin",
+           
+            tabBarLabel: "Kategoriler",
             tabBarIcon: ({ color }) => (
               <Image
                 source={categoryimg}
@@ -110,7 +111,7 @@ export default function App() {
           name="İlan Ver"
           component={HomeStackScreen}
           options={{
-            tabBarLabel: "Vitrin",
+            tabBarLabel: "İlan Ver",
             tabBarIcon: ({ color }) => (
               <Image
                 source={ilanver}
@@ -124,7 +125,7 @@ export default function App() {
           name="İlanlarım"
           component={HomeStackScreen}
           options={{
-            tabBarLabel: "Vitrin",
+            tabBarLabel: "İlanlarım",
             tabBarIcon: ({ color }) => (
               <Image
                 source={ilanlarimimg}
@@ -138,7 +139,7 @@ export default function App() {
           name="Hesabım"
           component={HomeStackScreen}
           options={{
-            tabBarLabel: "Vitrin",
+            tabBarLabel: "Hesabım",
             tabBarIcon: ({ color }) => (
               <Image
                 source={hesap}

@@ -60,27 +60,33 @@ export default function UserComponent({ navigation }) {
       </View>
 
       {/* USER LIST SECTION */}
-      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-        {filteredData.map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.userCard}
-            onPress={() =>
-              navigation.navigate("userDetails", {
-                userId: item.id,
-              })
-            }
-          >
-            <View style={styles.userHeader}>
-              <Image source={{ uri: item.avatar }} style={styles.userImage} />
-            </View>
-            <View style={styles.userName}>
-              <Text style={styles.userNameText}>
-                {item.first_name} {item.last_name}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        ))}
+      <ScrollView style={styles.scrollViewContainer} >
+          <View style={styles.userContainer} >
+            {filteredData.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.userCard}
+                onPress={() =>
+                  navigation.navigate("userDetails", {
+                    userId: item.id,
+                  })
+                }
+              >
+                <View style={styles.userHeader}>
+                  <Image
+                    source={{ uri: item.avatar }}
+                    style={styles.userImage}
+                  />
+                </View>
+                <View style={styles.userName}>
+                  <Text style={styles.userNameText}>
+                    {item.first_name} {item.last_name}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
+        
       </ScrollView>
     </View>
   );
@@ -90,8 +96,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    justifyContent:"center",
-    alignItems:"center"
+    justifyContent: "center",
+    alignItems: "center",
   },
   searchContainer: {
     width: "90%",
@@ -105,7 +111,6 @@ const styles = StyleSheet.create({
   searchIcon: {
     position: "absolute",
     left: 20,
-    
     top: 17,
     zIndex: 99,
   },
@@ -122,33 +127,46 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
+   
   },
   bannerImage: {
-    width: "90%",
+    width: "100%",
     height: "100%",
     resizeMode: "contain",
   },
   scrollViewContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    paddingVertical: 10,
+    
+  },
+  userContainer:{
+    display:"flex",
+    flexDirection:"row", 
+    flexWrap:"wrap",
+    alignItems:"center",
+    justifyContent:"space-around",
+    
   },
   userCard: {
-    width: "48%",
+    width: "45%",
     height: 200,
     marginVertical: 10,
     justifyContent: "space-around",
     alignItems: "center",
+    backgroundColor:"#EBEBED",
+    borderRadius:20
   },
   userHeader: {
     width: "80%",
     height: "80%",
     borderRadius: 20,
+    display:"flex",
+    justifyContent: "flex-end",
+    
   },
   userName: {
     width: "80%",
-    height: "10%",
+    height: "20%",
+    display:"flex",
+    justifyContent: "center",
   },
   userNameText: {
     color: "black",
@@ -157,7 +175,8 @@ const styles = StyleSheet.create({
   },
   userImage: {
     width: "100%",
-    height: "100%",
+    height: "90%",
     borderRadius: 20,
+    
   },
 });
