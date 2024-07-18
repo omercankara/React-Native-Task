@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 
 import UserDetailComponent from "../components/UserDetailComponent";
 import { addUserList } from "../store/redux/User";
+import HeaderComponent from "../components/HeaderComponent";
+
 export default function Home({ navigation, route }) {
   const id = route.params.userId;
   const [userDetail, setuserDetail] = useState([]);
@@ -23,6 +25,7 @@ export default function Home({ navigation, route }) {
 
   return (
     <View style={styles.container}>
+      <HeaderComponent/>
       <UserDetailComponent navigation={navigation} userDetail={userDetail} />
     </View>
   );

@@ -5,14 +5,13 @@ import {
   View,
   TextInput,
   Image,
-  FlatList,
+  ScrollView,
   TouchableOpacity,
 } from "react-native";
 import { useSelector } from "react-redux";
-import EvilIcons from '@expo/vector-icons/EvilIcons';
+import EvilIcons from "@expo/vector-icons/EvilIcons";
 
 const banner = require("../assets/banner.png");
-const userimg = require("../assets/userimg.png");
 
 export default function UserComponent({ navigation }) {
   const userData = useSelector((state) => state.Users.Users);
@@ -22,34 +21,12 @@ export default function UserComponent({ navigation }) {
     setSearchText(text);
   };
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.userCard}
-      onPress={() =>
-        navigation.navigate("userDetails", {
-          userId: item.id,
-        })
-      }
-    >
-      <View style={styles.userHeader}>
-        <Image source={{ uri: item.avatar }} style={styles.userImage} />
-      </View>
-      <View style={styles.userName}>
-        <Text style={styles.userNameText}>
-          {item.first_name} {item.last_name}
-        </Text>
-      </View>
-    </TouchableOpacity>
-  );
-
-
-
   //verinin geç yansıması durumunda error vermemesi için koşul
   if (!userData || !userData[0]) {
     return (
       <View style={styles.container}>
         <Text>Loading...</Text>
-      </View> 
+      </View>
     );
   }
 
@@ -63,7 +40,12 @@ export default function UserComponent({ navigation }) {
     <View style={styles.container}>
       {/* SEARCH INPUT SECTION*/}
       <View style={styles.searchContainer}>
-      <EvilIcons style={styles.searchİcon} name="search" size={24} color="black" />
+        <EvilIcons
+          style={styles.searchIcon}
+          name="search"
+          size={28}
+          color="black"
+        />
         <TextInput
           style={styles.inputStyle}
           placeholder="İsim veya soyisim arayın..."
@@ -78,13 +60,28 @@ export default function UserComponent({ navigation }) {
       </View>
 
       {/* USER LIST SECTION */}
-      <FlatList
-        style={styles.userListContainer}
-        data={filteredData}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-        numColumns={2} // İki sütun olarak gösterim
-      />
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+        {filteredData.map((item, index) => (
+          <TouchableOpacity
+            key={index}
+            style={styles.userCard}
+            onPress={() =>
+              navigation.navigate("userDetails", {
+                userId: item.id,
+              })
+            }
+          >
+            <View style={styles.userHeader}>
+              <Image source={{ uri: item.avatar }} style={styles.userImage} />
+            </View>
+            <View style={styles.userName}>
+              <Text style={styles.userNameText}>
+                {item.first_name} {item.last_name}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
     </View>
   );
 }
@@ -93,26 +90,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-  },
-  text: {
-    color: "white",
+    justifyContent:"center",
+    alignItems:"center"
   },
   searchContainer: {
-    width: "100%",
+    width: "90%",
     height: 60,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
-    display:"flex",
-    flexDirection:"row",
-    position:"relative"
+    flexDirection: "row",
+    position: "relative",
   },
-  searchİcon:{
-   left:30,
-   top:17,
-   zIndex:99,
-   position:"absolute"
+  searchIcon: {
+    position: "absolute",
+    left: 20,
     
+    top: 17,
+    zIndex: 99,
   },
   inputStyle: {
     width: "90%",
@@ -133,9 +128,11 @@ const styles = StyleSheet.create({
     height: "100%",
     resizeMode: "contain",
   },
-  userListContainer: {
-    flex: 1,
-    marginHorizontal: 10,
+  scrollViewContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    paddingVertical: 10,
   },
   userCard: {
     width: "48%",

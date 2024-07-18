@@ -27,19 +27,23 @@ import UserDetail from "./screen/UserDetail";
 const Tab = createMaterialBottomTabNavigator();
 const HomeStack = createNativeStackNavigator();
 
-const HeaderLogo = () => (
-  <View style={styles.headerLogoContainer}>
-    <Image source={logo} style={styles.headerLogo} />
-  </View>
-);
 
-const HeaderRight = () => (
-  <View style={styles.headerRightContainer}>
-    <Image source={msg} style={styles.headerRightIcon} />
-    <Image source={heart} style={styles.headerRightIcon} />
-    <Image source={bell} style={styles.bellIcon} />
-  </View>
-);
+// GEREKTİGİNDE KULLANILABİLİR
+// const HeaderLogo = () => (
+//   <View style={styles.headerLogoContainer}>
+//     <Image source={logo} style={styles.headerLogo} />
+//   </View>
+// );
+
+
+// GEREKTİGİNDE KULLANILABİLİR
+// const HeaderRight = () => (
+//   <View style={styles.headerRightContainer}>
+//     <Image source={msg} style={styles.headerRightIcon} />
+//     <Image source={heart} style={styles.headerRightIcon} />
+//     <Image source={bell} style={styles.bellIcon} />
+//   </View>
+// );
 
 function HomeStackScreen() {
   return (
@@ -48,17 +52,20 @@ function HomeStackScreen() {
         <HomeStack.Screen
           name="Home"
           component={Home}
+         
           options={{
-            headerTitle: (props) => <HeaderLogo {...props} />,
-            headerRight: () => <HeaderRight />,
+            headerShown:false,
+            // headerTitle: (props) => <HeaderLogo {...props} />,
+            // headerRight: () => <HeaderRight />,
           }}
         />
         <HomeStack.Screen
           name="userDetails"
           component={UserDetail}
           options={{
-            headerTitle: (props) => <HeaderLogo {...props} />,
-            headerRight: () => <HeaderRight />,
+            headerShown:false,
+            // headerTitle: (props) => <HeaderLogo {...props} />,
+            // headerRight: () => <HeaderRight />,
 
           }}
         />
@@ -93,7 +100,7 @@ export default function App() {
             tabBarIcon: ({ color }) => (
               <Image
                 source={categoryimg}
-                style={{ tintColor: "purple", left:0, width: 90, height: 40, top:-10}}
+                style={{ tintColor: "purple", left:0, width: 90, height: 40, bottom: 10}}
               />
             ),
           }}

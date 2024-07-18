@@ -1,12 +1,14 @@
-import { StyleSheet, Text, View, TouchableOpacity,Image } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import { fetchUser } from "../src/Services/Api";
-import { useDispatch } from "react-redux"; 
+import { useDispatch } from "react-redux";
 
-import UserComponent from '../components/UserComponent';
-import { addUserList } from "../store/redux/User"
-export default function Home({navigation}) {
-  const dispatch = useDispatch(); 
+import UserComponent from "../components/UserComponent";
+
+import { addUserList } from "../store/redux/User";
+import HeaderComponent from "../components/HeaderComponent";
+export default function Home({ navigation }) {
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,26 +20,24 @@ export default function Home({navigation}) {
       }
     };
     fetchData();
-  }, []); 
-
-
- 
+  }, []);
 
   return (
     <View style={styles.container}>
-        <UserComponent navigation={navigation} />
+      <HeaderComponent />
+      <UserComponent navigation={navigation} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container:{
-    height:1000,
-    width:'100%',
+  container: {
+    height: 1000,
+    width: "100%",
   },
-  item:{
-    width:'25%',
-    height:100,
-    backgroundColor:"blue"
-  }
+  item: {
+    width: "25%",
+    height: 100,
+    backgroundColor: "blue",
+  },
 });
