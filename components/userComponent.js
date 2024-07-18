@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,15 +6,21 @@ import {
   TextInput,
   Image,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import { useSelector } from "react-redux";
+import EvilIcons from '@expo/vector-icons/EvilIcons';
 
 const banner = require("../assets/banner.png");
 const userimg = require("../assets/userimg.png");
 
-export default function UserComponent({navigation}) {
+export default function UserComponent({ navigation }) {
   const userData = useSelector((state) => state.Users.Users);
+  const [searchText, setSearchText] = useState("");
+
+  const handleChange = (text) => {
+    setSearchText(text);
+  };
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
@@ -36,13 +42,33 @@ export default function UserComponent({navigation}) {
     </TouchableOpacity>
   );
 
+
+
+  //verinin geç yansıması durumunda error vermemesi için koşul
+  if (!userData || !userData[0]) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View> 
+    );
+  }
+
+  const filteredData = userData[0].filter(
+    (item) =>
+      item.first_name.toLowerCase().includes(searchText.toLowerCase()) ||
+      item.last_name.toLowerCase().includes(searchText.toLowerCase())
+  );
+
   return (
     <View style={styles.container}>
       {/* SEARCH INPUT SECTION*/}
       <View style={styles.searchContainer}>
+      <EvilIcons style={styles.searchİcon} name="search" size={24} color="black" />
         <TextInput
           style={styles.inputStyle}
-          placeholder="Marka, ürün adı, kategori arayın"
+          placeholder="İsim veya soyisim arayın..."
+          onChangeText={handleChange}
+          value={searchText}
         />
       </View>
 
@@ -54,7 +80,7 @@ export default function UserComponent({navigation}) {
       {/* USER LIST SECTION */}
       <FlatList
         style={styles.userListContainer}
-        data={userData[0]}
+        data={filteredData}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
         numColumns={2} // İki sütun olarak gösterim
@@ -77,13 +103,23 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
+    display:"flex",
+    flexDirection:"row",
+    position:"relative"
+  },
+  searchİcon:{
+   left:30,
+   top:17,
+   zIndex:99,
+   position:"absolute"
+    
   },
   inputStyle: {
     width: "90%",
     height: 35,
     backgroundColor: "#EBEBED",
     borderRadius: 6,
-    paddingLeft: 10,
+    paddingLeft: 40,
   },
   bannerContainer: {
     width: "100%",
@@ -99,13 +135,11 @@ const styles = StyleSheet.create({
   },
   userListContainer: {
     flex: 1,
-
     marginHorizontal: 10,
   },
   userCard: {
     width: "48%",
     height: 200,
-    
     marginVertical: 10,
     justifyContent: "space-around",
     alignItems: "center",
@@ -113,22 +147,20 @@ const styles = StyleSheet.create({
   userHeader: {
     width: "80%",
     height: "80%",
-   
-    borderRadius:20
+    borderRadius: 20,
   },
   userName: {
     width: "80%",
     height: "10%",
-    
   },
-  userNameText:{
-    color:"black",
-    fontWeight:'bold',
-    fontSize:15
+  userNameText: {
+    color: "black",
+    fontWeight: "bold",
+    fontSize: 15,
   },
-  userImage:{
-    width:'100%',
-    height:'100%',
-    borderRadius:20
-  }
+  userImage: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 20,
+  },
 });
