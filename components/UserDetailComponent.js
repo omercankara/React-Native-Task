@@ -16,9 +16,7 @@ export default function UserDetailComponent({ userDetail }) {
 
   return (
     <View style={styles.container}>
-
       <View style={styles.userHeader}>
-
         <View style={styles.userContent}>
           <Image source={{ uri: userDetail.avatar }} style={styles.userImage} />
           <Text style={styles.userName}>
