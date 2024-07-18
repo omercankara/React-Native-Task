@@ -46,11 +46,12 @@ function HomeStackScreen() {
           }}
         />
         <HomeStack.Screen
-          name="userDetail"
+          name="userDetails"
           component={UserDetail}
           options={{
             headerTitle: (props) => <HeaderLogo {...props} />,
             headerRight: () => <HeaderRight />,
+
           }}
         />
       </HomeStack.Navigator>

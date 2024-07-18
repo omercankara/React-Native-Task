@@ -6,24 +6,34 @@ import {
   TextInput,
   Image,
   FlatList,
+  TouchableOpacity
 } from "react-native";
 import { useSelector } from "react-redux";
 
 const banner = require("../assets/banner.png");
 const userimg = require("../assets/userimg.png");
 
-export default function UserComponent() {
-  const userData = useSelector((state) => state.Users.Users); 
+export default function UserComponent({navigation}) {
+  const userData = useSelector((state) => state.Users.Users);
 
   const renderItem = ({ item }) => (
-    <View style={styles.userCard}>
+    <TouchableOpacity
+      style={styles.userCard}
+      onPress={() =>
+        navigation.navigate("userDetails", {
+          userId: item.id,
+        })
+      }
+    >
       <View style={styles.userHeader}>
         <Image source={{ uri: item.avatar }} style={styles.userImage} />
       </View>
       <View style={styles.userName}>
-        <Text style={styles.userNameText}>{item.first_name} {item.last_name}</Text>
+        <Text style={styles.userNameText}>
+          {item.first_name} {item.last_name}
+        </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (

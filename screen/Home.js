@@ -25,7 +25,7 @@ export default function Home({navigation}) {
 
   return (
     <View style={styles.container}>
-        <UserComponent />
+        <UserComponent navigation={navigation} />
     </View>
   );
 }

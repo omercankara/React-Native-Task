@@ -12,3 +12,15 @@ export const fetchUser = async () => {
     throw error;
   }
 };
+
+
+export const fetchUserById = async (id) => {
+  try {
+    const response = await axios.get('https://reqres.in/api/users/'+id);
+    return response.data.data;
+   
+  } catch (error) {
+    console.error('Error: ', error);
+    throw error;
+  }
+};
