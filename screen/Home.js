@@ -12,6 +12,7 @@ export default function Home({navigation}) {
       try {
         const userData = await fetchUser();
         setUserData(userData);
+        
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -26,7 +27,7 @@ export default function Home({navigation}) {
 
   return (
     <View style={styles.container}>
-        <UserComponent userData={userData}/>
+        <UserComponent userData={userData.data}/>
     </View>
   );
 }
