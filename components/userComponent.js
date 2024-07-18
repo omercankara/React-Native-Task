@@ -21,7 +21,7 @@ export default function UserComponent({ navigation }) {
     setSearchText(text);
   };
 
-  //verinin geç yansıması durumunda error vermemesi için koşul
+  //verinin geç yansıması durumunda error vermemesi için koşul.
   if (!userData || !userData[0]) {
     return (
       <View style={styles.container}>
