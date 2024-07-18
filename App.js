@@ -13,6 +13,14 @@ const bell = require("./assets/bell.png");
 const heart = require("./assets/heart.png");
 const msg = require("./assets/msg.png");
 
+
+const homeimg = require("./assets/hme.png");
+const categoryimg = require("./assets/kategor.png");
+const ilanver = require("./assets/t.png");
+const ilanlarimimg = require("./assets/ilan.png");
+const hesap = require("./assets/hsp.png");
+
+
 import Home from "./screen/Home";
 import UserDetail from "./screen/UserDetail";
 
@@ -63,13 +71,16 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator screenOptions={{ headerShown: false }}>
-        <Tab.Screen
+      <Tab.Screen
           name="HomeStack"
           component={HomeStackScreen}
           options={{
             tabBarLabel: "Vitrin",
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="home" color={color} size={26} />
+              <Image
+                source={homeimg}
+                style={{ tintColor: "purple", right:10, width: 90, height: 50, top:-25 }}
+              />
             ),
           }}
         />
@@ -78,9 +89,12 @@ export default function App() {
           name="Kategoriler"
           component={HomeStackScreen}
           options={{
-            tabBarLabel: "Kategoriler",
+            tabBarLabel: "Vitrin",
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="home" color={color} size={26} />
+              <Image
+                source={categoryimg}
+                style={{ tintColor: "purple", left:0, width: 90, height: 40, top:-10}}
+              />
             ),
           }}
         />
@@ -89,9 +103,12 @@ export default function App() {
           name="İlan Ver"
           component={HomeStackScreen}
           options={{
-            tabBarLabel: "İlan Ver",
+            tabBarLabel: "Vitrin",
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="home" color={color} size={40} />
+              <Image
+                source={ilanver}
+                style={{ tintColor: "purple", left:15, width: 90, height: 80, bottom:30 }}
+              />
             ),
           }}
         />
@@ -100,9 +117,12 @@ export default function App() {
           name="İlanlarım"
           component={HomeStackScreen}
           options={{
-            tabBarLabel: "İlanlarım",
+            tabBarLabel: "Vitrin",
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="home" color={color} size={26} />
+              <Image
+                source={ilanlarimimg}
+                style={{ tintColor: "purple", left:0, width: 90, height: 50, bottom:10}}
+              />
             ),
           }}
         />
@@ -111,9 +131,12 @@ export default function App() {
           name="Hesabım"
           component={HomeStackScreen}
           options={{
-            tabBarLabel: "Hesabım",
+            tabBarLabel: "Vitrin",
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="home" color={color} size={26} />
+              <Image
+                source={hesap}
+                style={{ tintColor: "purple", left:0, width: 90, height: 50, bottom:10}}
+              />
             ),
           }}
         />
